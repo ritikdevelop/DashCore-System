@@ -1,5 +1,5 @@
 import { GraphQLFormattedError } from "graphql";
-import { url } from "inspector";
+
 
 type Error = {
   message: string;
@@ -47,16 +47,16 @@ const getGraphQLErrors = (
 };
 
 export const fetchWrapper = async (url: string, options: RequestInit) => {
-    const response = await customFetch(url, options);
+  const response = await customFetch(url, options);
 
-    const responseCLone = response.clone();
-    const body = await responseCLone.json();
+  const responseCLone = response.clone();
+  const body = await responseCLone.json();
 
-    const error = getGraphQLErrors(body);
+  const error = getGraphQLErrors(body);
 
-    if(error) {
-        throw error;
-    }
+  if (error) {
+    throw error;
+  }
 
-    return response;
+  return response;
 };
